@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liora Perfume</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #2a2a2a;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      height: 12vh;
+      width: 90vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+    .nav-links { display: flex; gap: 30px; color: #555; }
+    .nav-actions { display: flex; gap: 12px; }
+
+    .signup {
+      padding: 0.4rem 1.6rem;
+      border-radius: 999px;
+      background: #111;
+      color: white;
+    }
+
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      margin-top: 1rem;
+    }
+
+    p { margin: 1rem 0 2rem; color: #555; text-align: center; }
+
+    .cta {
+      padding: 0.6rem 1.8rem;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      margin-bottom: 3rem;
+    }
+
+    .video-wrapper {
+      width: 90vw;
+      min-height: 42vh;
+      max-height: 46vh;
+      border-radius: 20px 20px 0 0;
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .video-inner {
+      display: flex;
+      height: 100%;
+      transition: filter 0.4s ease;
+    }
+
+    .blur { filter: blur(2px) brightness(0.95); }
+
+    .product {
+      flex: 1;
+      background: #f8eef3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product img { width: 100%; height: 100%; }
+
+    /* RIGHT SIDE */
+    .panel {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.6rem;
+    }
+
+    .line {
+      background-color: #f0f0f0;
+      width: 100%;
+      height: 0.01rem;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input {
+      height: 34px;
+      border-radius: 6px;
+      border: 1px solid #eee;
+      padding: 0 10px;
+      font-size: 0.85rem;
+    }
+
+    .checkout-btn {
+      height: 38px;
+      border-radius: 999px;
+      border: none;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .checkout-btn:active { transform: scale(0.92); }
+
+    /* MODAL */
+    .modal {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 55%;
+      padding: 30px;
+      background: #ffff;
+      border-radius: 16px;
+      border: 1px solid #f0f0f0;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .success-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .check {
+      width: 4rem;
+      height: 4rem;
+      position: relative;
+    }
+
+    @media( max-width : 900px) {
+
+    }
+
+    @keyframes draw {
+      to { opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">Liora</div>
+    <div class="nav-links">
+      <span>Products</span>
+      <span>Story</span>
+      <span>Pricing</span>
+    </div>
+    <div class="nav-actions">
+      <span>Login</span>
+      <div class="signup">Sign up</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Liora</h1>
+      <p>A fragrance that lingers like light on silk.</p>
+      <a class="cta">Shop Now</a>
+    </div>
+
+    <div class="video-wrapper">
+      <div class="video-inner" id="video">
+
+        <div class="product">
+          <img src="/public/zulian-firmansyah-tspoqtC758I-unsplash.jpg" />
+        </div>
+
+        <div class="panel">
+          <div>
+            <div class="item"><span>Personal details</div>
+            <div class="line"></div>
+          </div>
+
+          <div class="details">
+            <input id="name" class="input" placeholder="Full Name" />
+            <input id="email" class="input" placeholder="Email" />
+          </div>
+
+          <button class="checkout-btn" id="checkout">Checkout</button>
+        </div>
+
+      </div>
+
+      <div class="modal" id="modal">
+        <div class="success-state">
+          <img class="check" src="/public/check-mark.png" alt="">
+          <p>Order confirmed</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const checkout = document.getElementById('checkout');
+    const modal = document.getElementById('modal');
+    const video = document.getElementById('video');
+
+    function type(input, text, cb) {
+      let i = 0;
+      let t = setInterval(() => {
+        input.value += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(t);
+          cb && cb();
+        }
+      }, 200);
+    }
+
+    function runAnimation() {
+      nameInput.value = '';
+      emailInput.value = '';
+      modal.classList.remove('show');
+      video.classList.remove('blur');
+
+      setTimeout(() => {
+        type(nameInput, 'Thato Pailane', () => {
+          type(emailInput, 'pailanethato7@gmail.com', () => {
+            setTimeout(() => {
+              checkout.click();
+
+              modal.classList.add('show');
+              video.classList.add('blur');
+
+              setTimeout(() => {
+                modal.classList.remove('show');
+                video.classList.remove('blur');
+                runAnimation();
+              }, 2500);
+
+            }, 400);
+          });
+        });
+      }, 600);
+    }
+
+    runAnimation();
+  </script>
+
+</body>
+</html>
